@@ -1,3 +1,5 @@
+# inital script which is required to create the database
+
 import mysql.connector
 
 mydb = mysql.connector.connect(

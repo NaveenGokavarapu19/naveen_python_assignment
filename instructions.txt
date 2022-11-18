@@ -6,7 +6,8 @@ initalize a virtual environment a) python3 venv <venv-name>
 
 
 
-#---------- installing mysql in linux ----------------#
+#---------- installing mysql in linux and other steps. ----------------#
 sudo apt install mysql-server 
 sudo mysql 
 run the command:ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'admin';
+run the create_database.py script to create the database required for the application to run.

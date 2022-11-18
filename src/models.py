@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker,declarative_base,relationship
 
 
 Base = declarative_base()
-class User(Base):
+class User(Base): # declaring class which will be used to make the table.
     __tablename__ = "users"
     id = Column(Integer, Sequence("user_id_seq"), primary_key=True)
     name = Column(String(50))
@@ -12,7 +12,7 @@ class User(Base):
     profile = Column(String(50))
     picture_url = Column(String(50))
     mobile = Column(BigInteger,unique=True)
-    child = relationship("Address", back_populates="parent",uselist=False)
+    child = relationship("Address", back_populates="parent",uselist=False) # code related to one to one relationship mapping
 
     def __init__(self,name,email,password,profile,picture_url,mobile):
         self.name = name,
@@ -21,8 +21,8 @@ class User(Base):
         self.profile = profile
         self.picture_url = picture_url
         self.mobile = mobile
-    def __repr__(self):
-        return  f"{self.name} {self.email} {self.password} {self.profile} {self.picture_url} {self.mobile}"
+    def __repr__(self): # using repr to send the values of the data when object is called.
+        return  self.name[0] + " " + self.email[0] +" "+ self.password[0] + " "+self.profile + " "+self.picture_url + str(self.mobile)
 
 class Address(Base):
     __tablename__ = "address"
@@ -33,7 +33,7 @@ class Address(Base):
     city = Column(String(50))
     state = Column(String(50))
     pin_code = Column(BigInteger)
-    user_mail = Column(String(50), ForeignKey("users.email"))
+    user_mail = Column(String(50), ForeignKey("users.email")) # creating the foreign key.
     parent = relationship("User", back_populates="child")
 
     def __init__(self,flat_number,address1,address2,city,state,pin_code,user_mail):
@@ -51,7 +51,7 @@ class Address(Base):
 
 
 engine = create_engine('mysql://root:admin@127.0.0.1:3306/information',echo=True)
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine) #creating tables required by using the declared classes.
 
 
 Session = sessionmaker(bind=engine)

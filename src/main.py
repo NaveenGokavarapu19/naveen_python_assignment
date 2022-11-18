@@ -1,14 +1,27 @@
-from flask import Flask, request, render_template
+from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 
+
+
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:admin@127.0.0.1:3306/information'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 
-@app.route("/add")
+
+
+
+
+
+
+
+
+@app.route("/add_user")
 def add_task():
-    data = {'name': 'nabin khadka'}
-    return data,200
+    return "request_succesful",200
     
 
 
@@ -26,4 +39,4 @@ if __name__=="__main__":
     args = parser.parse_args()
     os.environ['FLASK_PORT'] = str(args.port)
     flask_port = int(os.environ.get('FLASK_PORT'))
-    app.run(host="0.0.0.0",port=f'{flask_port}')
+    app.run(host="0.0.0.0",port=f'{flask_port}',debug=True)

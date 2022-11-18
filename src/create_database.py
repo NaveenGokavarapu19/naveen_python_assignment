@@ -8,4 +8,8 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("CREATE DATABASE USER")
+try:
+  mycursor.execute("CREATE DATABASE information")
+except Exception as e:
+    print("Program failed due to following error")
+    print(e)

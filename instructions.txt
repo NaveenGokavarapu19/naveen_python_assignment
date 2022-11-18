@@ -11,3 +11,10 @@ sudo apt install mysql-server
 sudo mysql 
 run the command:ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'admin';
 run the create_database.py script to create the database required for the application to run.
+
+
+#----- running the application -------------------#
+use the command python3 main.py -p <port-number>
+curl -i http://127.0.0.1:<port-number>/add_user for adding users
+curl -i http://127.0.0.1:<port-number>/get_registred_users for showing the added users
+

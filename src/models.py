@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String,Sequence,ForeignKey,create_engine,BigInteger
+from sqlalchemy import Column, Integer, String,Sequence,ForeignKey,create_engine,BigInteger,inspect
 from sqlalchemy.orm import sessionmaker,declarative_base,relationship
 
 
@@ -14,8 +14,15 @@ class User(Base):
     mobile = Column(BigInteger,unique=True)
     child = relationship("Address", back_populates="parent",uselist=False)
 
+    def __init__(self,name,email,password,profile,picture_url,mobile):
+        self.name = name,
+        self.email = email,
+        self.password = password,
+        self.profile = profile
+        self.picture_url = picture_url
+        self.mobile = mobile
     def __repr__(self):
-        return str("name=" + self.name + "email=" + self.email + "password=" + self.password + "profile=" +self.profile + "picture_url=" +self.picture_url + "mobile =" + self.mobile)
+        return  f"{self.name} {self.email} {self.password} {self.profile} {self.picture_url} {self.mobile}"
 
 class Address(Base):
     __tablename__ = "address"
@@ -29,17 +36,18 @@ class Address(Base):
     user_mail = Column(String(50), ForeignKey("users.email"))
     parent = relationship("User", back_populates="child")
 
+    def __init__(self,flat_number,address1,address2,city,state,pin_code,user_mail):
+            self.flat_number = flat_number
+            self.address1 = address1
+            self.address2 = address2
+            self.city = address2
+            self.state = state
+            self.pin_code = pin_code
+            self.user_email = user_mail
+
 
     def __repr__(self):
-        return "<Address(flat_number = '%s',address1='%s',address2='%s',city='%s',state='%s',pin_code='%d',user_mail='%s')>" %(
-            self.flat_number,
-            self.address1,
-            self.address2,
-            self.city,
-            self.state,
-            self.pin_code,
-            self.user_email
-        )
+        return  self.flat_number + " " + self.address1 +" "+ self.address2 + " "+self.city + " "+self.state +" "+ str(self.pin_code)
 
 
 engine = create_engine('mysql://root:admin@127.0.0.1:3306/information',echo=True)

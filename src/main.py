@@ -1,14 +1,11 @@
 from flask import Flask, request
-from flask_sqlalchemy import SQLAlchemy
 import os
+from models import session,User,Address,inspect
 
 
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:admin@127.0.0.1:3306/information'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
 
 
@@ -21,14 +18,33 @@ db = SQLAlchemy(app)
 
 @app.route("/add_user")
 def add_task():
-    return "request_succesful",200
+    user=User(name="ed2",email="212322@",password="aasdsa",profile="121",picture_url= "url",mobile=102013122)
+    address = Address(flat_number="104",address1="sea shell121",address2="siripuram12",city="vizag212",state="AP12",pin_code=442341223,user_mail=user.email)
+    session.add(user)
+    session.commit()
+    session.add(address)
+    session.commit()
+    return "added_data_successfully",200
     
 
 
 
-@app.route("/update")
+@app.route("/get_registred_users")
 def update_task():
-    pass
+    json_body = []
+    inst = inspect(User)
+    column_names = [c_attr.key for c_attr in inst.mapper.column_attrs]
+    results = session.query(User).all()
+    for result in results:
+        data_list = str(result).split(" ")
+        dictionary = dict(zip(column_names,data_list))
+        json_body.append(dictionary)
+
+    response = {"result":json_body}
+    return response,200
+
+    
+    
 
 
 

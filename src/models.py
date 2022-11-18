@@ -13,7 +13,7 @@ class User(Base):
     mobile = Column(BigInteger)
 
     def __repr__(self):
-        return "<User(name='%s', email'%s',profile='%s')>" % (
+        return "<User(name='%s', email='%s',password='%s',profile='%s',picture_url='%s',mobile='%d')>" %(
             self.name,
             self.email,
             self.password,
@@ -22,6 +22,27 @@ class User(Base):
             self.mobile
         )
 
+class Address(Base):
+    __tablename__ = "users"
+    id = Column(Integer, Sequence("user_id_seq"), primary_key=True)
+    flat_number = Column(String(50))
+    address1 =  Column(String(50)) 
+    address2 =  Column(String(50)) 
+    city = Column(String(50))
+    state = Column(String(50))
+    pin_code = Column(BigInteger)
+
+    def __repr__(self):
+        return "<User(name='%s', flat_number = '%s',address1='%s',address2='%s',city='%s',state='%s',pin_code='%d')>" %(
+            self.flat_number,
+            self.address1,
+            self.address2,
+            self.city,
+            self.state,
+            self.pin_code
+        )
+
+
 engine = create_engine('mysql://root:admin@127.0.0.1:3306/information',echo=True)
 Base.metadata.create_all(bind=engine)
 
@@ -29,5 +50,4 @@ Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-user = User(name="ed", fullname="Ed Jones", nickname="edsnickname")
-session.add(user)
+

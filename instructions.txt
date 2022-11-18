@@ -1,0 +1,5 @@
+#------------- instructions for the running application for linux----------------------------#
+initalize a virtual environment a) python3 venv <venv-name>
+                                   source <venv-name>/bin/activate
+
+2) after activating the venv run the command pip install -r requirements.txt

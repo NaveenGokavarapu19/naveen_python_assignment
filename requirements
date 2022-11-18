@@ -1,5 +1,5 @@
 Create a Python application using Flask which will act as a server. This application will be used as an interface between frontend applications and Database to transmit data through REST APIs. No GUI or webpages are required, just develop server-side application. Maintain a postman file for API interactions. The purpose of this application is to manage the users. Below are the points to be covered in this application.
-Server should run on a dynamic PORT. User should have choice to run the server on any PORT at the time of starting it.
+Server should run on a dynamic PORT. User should have choice to run the server on any PORT at the time of starting it.(done)
 Application should validate data before storing it into the database.
 It would be great if application should use any ORM library to interact with Database (Not mandatory).
 Application must have below REST APIs.

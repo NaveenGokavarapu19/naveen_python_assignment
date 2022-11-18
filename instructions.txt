@@ -3,3 +3,10 @@ initalize a virtual environment a) python3 venv <venv-name>
                                    source <venv-name>/bin/activate
 
 2) after activating the venv run the command pip install -r requirements.txt
+
+
+
+#---------- installing mysql in linux ----------------#
+sudo apt install mysql-server 
+sudo mysql 
+run the command:ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'admin';

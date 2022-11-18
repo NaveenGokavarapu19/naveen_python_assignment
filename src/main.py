@@ -8,8 +8,9 @@ app = Flask(__name__)
 @app.route("/add")
 def add_task():
     data = {'name': 'nabin khadka'}
-    return data, 200
+    return data,200
     
+
 
 
 @app.route("/update")
